@@ -28,7 +28,7 @@ struct Device {
 
 // A battery device may be "off" and unplugged but still function.
 struct BatteryDevice : virtual public Device {
-  // state extention
+  // state extension
   bool charging;
   float charge;
 
