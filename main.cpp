@@ -6,6 +6,9 @@ using namespace std;
 
 // I'm assuming all devices have can be turned on or off without removing the power supply.
 struct Device {
+  //state
+  bool power;
+  
   Device() : power(false) {}
 
   void handlePowerOn() {
@@ -17,15 +20,15 @@ struct Device {
   }
 
   // returns the string to be shown or read when the power status is requested
+  // I'm assuming a string would be sufficient enough for text-to-speech and rendering
   virtual string getPowerStatus() {
     return "device " + string(power ? "on" : "off");
   }
-
-  bool power;
 };
 
 // A battery device may be "off" and unplugged but still function.
 struct BatteryDevice : virtual public Device {
+  // state extention
   bool charging;
   float charge;
 
@@ -42,7 +45,7 @@ struct BatteryDevice : virtual public Device {
   void handleUpdateCharge(float increase) {
     charge += increase;
   }
-
+  
   string getPowerStatus() override {
     string status = "battery life at " + to_string((int) round(charge * 100)) + "%";
     if(!power)
