@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <string> // to_string
 #include <cmath> // round
 
